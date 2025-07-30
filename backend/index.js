@@ -129,6 +129,10 @@ app.get('/votes/:id', async (req, res) => {
     }
 });
 
+app.get('/', async (req, res) => {
+    res.json("Server is running");
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
