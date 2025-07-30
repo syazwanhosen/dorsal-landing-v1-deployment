@@ -3,6 +3,7 @@ const cors = require('cors');
 const { google } = require('googleapis');
 require('dotenv').config();
 const fs = require('fs');
+const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -12,7 +13,9 @@ const PORT = process.env.PORT || 4000;
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 
 // Load client secrets from a local file.
-const credentials = JSON.parse(fs.readFileSync('service-account.json'));
+const credentials = JSON.parse(
+  fs.readFileSync(path.join(__dirname, 'service-account.json'))
+);
 
 // Authorize a client with credentials
 const auth = new google.auth.JWT(
