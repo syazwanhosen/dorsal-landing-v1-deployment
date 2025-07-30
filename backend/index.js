@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const { google } = require('googleapis');
 require('dotenv').config();
-const fs = require('fs');
 
 const app = express();
 app.use(cors());
@@ -10,9 +9,10 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 4000;
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
+const GOOGLE_CREDENTIALS = process.env.GOOGLE_CREDENTIALS;
 
 // Load client secrets from a local file.
-const credentials = JSON.parse(fs.readFileSync('service-account.json'));
+const credentials = JSON.parse(GOOGLE_CREDENTIALS);
 
 // Authorize a client with credentials
 const auth = new google.auth.JWT(
