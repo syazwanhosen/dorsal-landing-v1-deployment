@@ -16,6 +16,7 @@ const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 const credentials = JSON.parse(
   fs.readFileSync(path.join(__dirname, 'service-account.json'))
 );
+const fullPath = path.resolve(__dirname, 'service-account.json');
 
 console.log('Reading from path:', fullPath);
 console.log('File exists?', fs.existsSync(fullPath));
