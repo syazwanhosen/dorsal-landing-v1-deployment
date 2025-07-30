@@ -13,13 +13,11 @@ const PORT = process.env.PORT || 4000;
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 
 // Load client secrets from a local file.
-const credentials = JSON.parse(
-  fs.readFileSync(path.join(__dirname, 'service-account.json'))
-);
-const fullPath = path.resolve(__dirname, 'service-account.json');
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS || '{}');
 
-console.log('Reading from path:', fullPath);
-console.log('File exists?', fs.existsSync(fullPath));
+if (!credentials.client_email) {
+  throw new Error('Missing GOOGLE_CREDENTIALS or invalid JSON');
+}
 
 // Authorize a client with credentials
 const auth = new google.auth.JWT(
