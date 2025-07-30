@@ -17,6 +17,9 @@ const credentials = JSON.parse(
   fs.readFileSync(path.join(__dirname, 'service-account.json'))
 );
 
+console.log('Reading from path:', fullPath);
+console.log('File exists?', fs.existsSync(fullPath));
+
 // Authorize a client with credentials
 const auth = new google.auth.JWT(
     credentials.client_email,
