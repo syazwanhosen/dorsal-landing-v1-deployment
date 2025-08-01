@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 4000;
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 
 // Load client secrets from a local file.
-const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS || '{}');
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
 
 if (!credentials.client_email) {
   throw new Error('Missing GOOGLE_CREDENTIALS or invalid JSON');
@@ -23,7 +23,7 @@ if (!credentials.client_email) {
 const auth = new google.auth.JWT(
     credentials.client_email,
     null,
-    credentials.private_key,
+    credentials.private_key.replace(/\\n/g, '\n'),
     ['https://www.googleapis.com/auth/spreadsheets']
 );
 
